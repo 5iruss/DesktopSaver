@@ -1,4 +1,4 @@
-  import os
+import os
 import asyncio
 import telegram
 from watchdog.observers import Observer
@@ -37,10 +37,10 @@ class DesktopHandler(FileSystemEventHandler):
                 return
 
 async def main():
-    path = "Enter_Your_Desktop_Locatio"
+    desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
     event_handler = DesktopHandler()
     observer = Observer()
-    observer.schedule(event_handler, path, recursive=False)
+    observer.schedule(event_handler, desktop_path, recursive=False)
     observer.start()
     
     print("The bot is active and monitoring your desktop files.")

